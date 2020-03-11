@@ -6,7 +6,7 @@
 # http://github.com/martcus
 #--------------------------------------------------------------------------------------------------
 
-readonly STATS4WS_APPNAME="avg"
+readonly STATS4WS_APPNAME="stats"
 readonly STATS4WS_VERSION="1.0.0"
 readonly STATS4WS_BASENAME=$(basename "$0")
 
@@ -14,11 +14,10 @@ readonly STATS4WS_BASENAME=$(basename "$0")
 readonly SAVEIFS=$IFS
 IFS=$(echo -en "\n\b") # <-- change this as it depends on your app
 
-
 #Param
 # 1 file di log
 
-echo -e "log;operation;calls;min;max;median;mean"
+echo -e "log;operation;calls;mean;min;max;25perc;median;75perc"
 
 # identifico l'elenco dei servizi disponibili
 LIST_OPS="zgrep \"=Response\" \"$1\" |  cut -d\";\" -f5 | sed 's/targetOperation=//' | sort | uniq"
@@ -28,9 +27,11 @@ for ops in $(eval "$LIST_OPS"); do
 
     printf "$1;$ops;"
 	 echo $(eval "$_CMD") | tr ' ' '\n' | awk '
-		{ a[i++]=$0; s+=$0 } 
-		END { 
-			printf "%.0f;%.0f;%.0f;%.0f;%.0f\n", i, a[0], a[i-1], (a[int(i/2)]+a[int((i-1)/2)])/2, s/i 
+		{
+			a[i++]=$0; s+=$0; all[NR]=$0
+		}
+		END {
+			printf "%.0f;%.0f;%.0f;%.0f;%.0f;%.0f;%.0f\n", i, s/i, a[0], a[i-1], all[int(NR*0.25 - 0.5)], (a[int(i/2)]+a[int((i-1)/2)])/2, all[int(NR*0.75 - 0.5)]
 		}'
 done
 
