@@ -31,7 +31,7 @@ for ops in $(eval "$LIST_OPS"); do
 			a[i++]=$0; s+=$0; all[NR]=$0
 		}
 		END {
-			printf "%.0f;%.0f;%.0f;%.0f;%.0f;%.0f;%.0f\n", i, s/i, a[0], a[i-1], all[int(NR*0.25 - 0.5)], (a[int(i/2)]+a[int((i-1)/2)])/2, all[int(NR*0.75 - 0.5)]
+			printf "%.0f;%.0f;%.0f;%.0f;%.0f;%.0f;%.0f\n", i, s/i, a[0], a[i-1], all[int(NR*0.25 + 0.5)], (a[int(i/2)]+a[int((i-1)/2)])/2, all[int(NR*0.75 + 0.5)]
 		}'
 done
 
