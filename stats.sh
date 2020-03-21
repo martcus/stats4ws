@@ -7,7 +7,7 @@
 #--------------------------------------------------------------------------------------------------
 
 readonly STATS4WS_APPNAME="stats"
-readonly STATS4WS_VERSION="0.1.0"
+readonly STATS4WS_VERSION="1.0.0"
 readonly STATS4WS_BASENAME=$(basename "$0")
 
 # IFS stands for "internal field separator". It is used by the shell to determine how to do word splitting, i. e. how to recognize word boundaries.
