@@ -8,7 +8,7 @@ Your log must be report a line before every response like this:
 
 ## Help
 ```
-stats.sh v0.1.0
+stats.sh v1.0.0
 Statistics for web services based on axis1
 Copyright (c) Marco Lovazzano
 Licensed under the GNU General Public License v3.0
